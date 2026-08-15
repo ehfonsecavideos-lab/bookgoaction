@@ -55,7 +55,14 @@ function NovaJornada() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [stage, setStage] = useState<Stage>("idle");
-  const [result, setResult] = useState<Awaited<ReturnType<typeof buildJourney>> | null>(null);
+  const [result, setResult] = useState<{
+    journeyId: string;
+    conceptCount: number;
+    mainTheme: string;
+    category: string;
+    summary: string;
+    concepts: { name: string; teaching: string }[];
+  } | null>(null);
 
   const busy = stage === "reading" || stage === "uploading" || stage === "analyzing";
 
@@ -107,7 +114,7 @@ function NovaJornada() {
           file_path: path,
           file_type: ext,
           file_size: file.size,
-          pages: extracted.pages ?? null,
+          pages: extracted.pageCount ?? null,
           status: "processing",
         })
         .select("id")
@@ -151,8 +158,8 @@ function NovaJornada() {
                 </p>
                 <ul className="mt-2 space-y-1 text-sm">
                   {result.concepts.map((c) => (
-                    <li key={c.title} className="rounded-lg bg-secondary px-3 py-2">
-                      {c.title}
+                    <li key={c.name} className="rounded-lg bg-secondary px-3 py-2">
+                      {c.name}
                     </li>
                   ))}
                 </ul>
@@ -242,7 +249,7 @@ function NovaJornada() {
                   <p className="truncate font-medium">{file.name}</p>
                   <p className="text-xs text-muted-foreground">
                     {formatSize(file.size)}
-                    {extracted.pages ? ` · ${extracted.pages} páginas` : ""} ·{" "}
+                    {extracted.pageCount ? ` · ${extracted.pageCount} páginas` : ""} ·{" "}
                     {extracted.text.length.toLocaleString("pt-BR")} caracteres lidos
                   </p>
                 </div>

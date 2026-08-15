@@ -44,7 +44,10 @@ function AuthPage() {
     setBusy(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     navigate({ to: "/dashboard", replace: true });
   }
 
@@ -60,7 +63,10 @@ function AuthPage() {
       },
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     toast.success("Conta criada! Você já pode começar.");
     navigate({ to: "/dashboard", replace: true });
   }
@@ -72,7 +78,8 @@ function AuthPage() {
     });
     if (result.error) {
       setBusy(false);
-      return toast.error("Não foi possível entrar com o Google.");
+      toast.error("Não foi possível entrar com o Google.");
+      return;
     }
     if (result.redirected) return;
     navigate({ to: "/dashboard", replace: true });
