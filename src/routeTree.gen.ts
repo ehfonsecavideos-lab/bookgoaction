@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AppBibliotecaRouteImport } from './routes/_app.biblioteca'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppNovaRouteImport } from './routes/_app.nova'
 
@@ -29,6 +30,11 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppBibliotecaRoute = AppBibliotecaRouteImport.update({
+  id: '/biblioteca',
+  path: '/biblioteca',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppDashboardRoute = AppDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -43,12 +49,14 @@ const AppNovaRoute = AppNovaRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/biblioteca': typeof AppBibliotecaRoute
   '/dashboard': typeof AppDashboardRoute
   '/nova': typeof AppNovaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/biblioteca': typeof AppBibliotecaRoute
   '/dashboard': typeof AppDashboardRoute
   '/nova': typeof AppNovaRoute
 }
@@ -57,15 +65,23 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_app/biblioteca': typeof AppBibliotecaRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/nova': typeof AppNovaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard' | '/nova'
+  fullPaths: '/' | '/auth' | '/biblioteca' | '/dashboard' | '/nova'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard' | '/nova'
-  id: '__root__' | '/' | '/_app' | '/auth' | '/_app/dashboard' | '/_app/nova'
+  to: '/' | '/auth' | '/biblioteca' | '/dashboard' | '/nova'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/auth'
+    | '/_app/biblioteca'
+    | '/_app/dashboard'
+    | '/_app/nova'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -97,6 +113,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/biblioteca': {
+      id: '/_app/biblioteca'
+      path: '/biblioteca'
+      fullPath: '/biblioteca'
+      preLoaderRoute: typeof AppBibliotecaRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/dashboard': {
       id: '/_app/dashboard'
       path: '/dashboard'
@@ -115,11 +138,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppBibliotecaRoute: typeof AppBibliotecaRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppNovaRoute: typeof AppNovaRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppBibliotecaRoute: AppBibliotecaRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppNovaRoute: AppNovaRoute,
 }
