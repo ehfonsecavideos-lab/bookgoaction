@@ -32,7 +32,7 @@ export const Route = createFileRoute("/_app/nova")({
       { property: "og:description", content: "Do upload à jornada de 21 dias em poucos minutos." },
     ],
   }),
-  component: NovaJornada;
+  component: NovaJornada,
 });
 
 type Stage = "idle" | "reading" | "uploading" | "analyzing" | "done";
