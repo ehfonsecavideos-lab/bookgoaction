@@ -114,7 +114,8 @@ function NovaJornada() {
           file_path: path,
           file_type: ext,
           file_size: file.size,
-          pages: extracted.pageCount ?? null,
+          page_count: extracted.pageCount,
+          chapter_count: extracted.chapterCount,
           status: "processing",
         })
         .select("id")
