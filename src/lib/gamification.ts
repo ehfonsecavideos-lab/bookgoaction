@@ -5,14 +5,17 @@ export const XP_RULES = {
   journey: 500,
 } as const;
 
-export const LEVELS = [
+export type LevelDef = { level: number; name: string; min: number };
+
+export const LEVELS: LevelDef[] = [
   { level: 1, name: "Explorador", min: 0 },
   { level: 2, name: "Aprendiz", min: 300 },
   { level: 3, name: "Praticante", min: 800 },
   { level: 4, name: "Disciplinado", min: 1500 },
   { level: 5, name: "Transformador", min: 2500 },
   { level: 6, name: "Mestre", min: 4000 },
-] as const;
+];
+
 
 export function levelFromXp(xp: number) {
   let current = LEVELS[0]!;
