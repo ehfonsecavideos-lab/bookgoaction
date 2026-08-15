@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppBibliotecaRouteImport } from './routes/_app.biblioteca'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppNovaRouteImport } from './routes/_app.nova'
+import { Route as AppJornadaIdRouteImport } from './routes/_app.jornada.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -45,6 +46,11 @@ const AppNovaRoute = AppNovaRouteImport.update({
   path: '/nova',
   getParentRoute: () => AppRoute,
 } as any)
+const AppJornadaIdRoute = AppJornadaIdRouteImport.update({
+  id: '/jornada/$id',
+  path: '/jornada/$id',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/biblioteca': typeof AppBibliotecaRoute
   '/dashboard': typeof AppDashboardRoute
   '/nova': typeof AppNovaRoute
+  '/jornada/$id': typeof AppJornadaIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/biblioteca': typeof AppBibliotecaRoute
   '/dashboard': typeof AppDashboardRoute
   '/nova': typeof AppNovaRoute
+  '/jornada/$id': typeof AppJornadaIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -68,12 +76,14 @@ export interface FileRoutesById {
   '/_app/biblioteca': typeof AppBibliotecaRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/nova': typeof AppNovaRoute
+  '/_app/jornada/$id': typeof AppJornadaIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/biblioteca' | '/dashboard' | '/nova'
+  fullPaths:
+    '/' | '/auth' | '/biblioteca' | '/dashboard' | '/nova' | '/jornada/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/biblioteca' | '/dashboard' | '/nova'
+  to: '/' | '/auth' | '/biblioteca' | '/dashboard' | '/nova' | '/jornada/$id'
   id:
     | '__root__'
     | '/'
@@ -82,6 +92,7 @@ export interface FileRouteTypes {
     | '/_app/biblioteca'
     | '/_app/dashboard'
     | '/_app/nova'
+    | '/_app/jornada/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -134,6 +145,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppNovaRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/jornada/$id': {
+      id: '/_app/jornada/$id'
+      path: '/jornada/$id'
+      fullPath: '/jornada/$id'
+      preLoaderRoute: typeof AppJornadaIdRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
@@ -141,12 +159,14 @@ interface AppRouteChildren {
   AppBibliotecaRoute: typeof AppBibliotecaRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppNovaRoute: typeof AppNovaRoute
+  AppJornadaIdRoute: typeof AppJornadaIdRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppBibliotecaRoute: AppBibliotecaRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppNovaRoute: AppNovaRoute,
+  AppJornadaIdRoute: AppJornadaIdRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
