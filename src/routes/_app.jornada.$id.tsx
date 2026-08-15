@@ -61,9 +61,9 @@ function JourneyPage() {
           .order("day_number"),
         supabase
           .from("check_ins")
-          .select("id, reflection, note, difficulty, created_at, journey_days!inner(day_number, title, journey_id)")
+          .select("id, reflection, note, difficulty, completed_at, journey_days!inner(day_number, title, journey_id)")
           .eq("journey_days.journey_id", id)
-          .order("created_at", { ascending: false }),
+          .order("completed_at", { ascending: false }),
       ]);
       return {
         journey: journey.data,
@@ -86,7 +86,9 @@ function JourneyPage() {
     setThinking(true);
     try {
       const res = await ask({
-        data: { journeyId: id, dayNumber: current?.day_number, question: text },
+        data: current
+          ? { journeyId: id, dayNumber: current.day_number, question: text }
+          : { journeyId: id, question: text },
       });
       setMessages((prev) => [...prev, { role: "coach", text: res.answer }]);
     } catch {
