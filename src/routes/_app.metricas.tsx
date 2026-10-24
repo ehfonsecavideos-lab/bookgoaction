@@ -284,10 +284,10 @@ function AgileMetricsDashboard() {
       {audience === "executivo" ? (
         <>
           <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            <MetricCard label="Projetos ativos" value="12" detail="em 4 áreas de negócio" icon={Layers3} trend="+2" />
-            <MetricCard label="Saúde do portfólio" value="83%" detail="índice demonstrativo" icon={Activity} tone="success" trend="+5,2%" />
-            <MetricCard label="Previsibilidade" value="76%" detail="entregas concluídas / planejadas" icon={Target} tone="warning" trend="+3,1%" />
-            <MetricCard label="Projetos críticos" value="2" detail="requerem plano de ação" icon={AlertTriangle} tone="danger" trend="+1" />
+            <MetricCard label="Projetos ativos" value="4" detail="em 3 squads demonstrativas" icon={Layers3} trend="+2" />
+            <MetricCard label="Saúde do portfólio" value="50%" detail="dos projetos na amostra saudáveis" icon={Activity} tone="success" trend="+5,2%" />
+            <MetricCard label="Previsibilidade" value="77%" detail="entregas concluídas / planejadas" icon={Target} tone="warning" trend="+3,1%" />
+            <MetricCard label="Projetos críticos" value="1" detail="requer plano de ação" icon={AlertTriangle} tone="danger" trend="+1" />
           </section>
 
           <section className="grid gap-4 xl:grid-cols-[1.6fr_1fr]">
