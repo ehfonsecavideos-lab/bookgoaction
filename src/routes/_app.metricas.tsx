@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
+import type { ReactNode } from "react";
 import { Activity, AlertTriangle, ArrowDownRight, ArrowUpRight, BarChart3, CalendarDays, CheckCircle2, Clock3, Gauge, Layers3, RefreshCw, Target, TrendingUp, Zap } from "lucide-react";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
@@ -167,7 +168,7 @@ function KpiCard({ title, value, unit, change, note, icon: Icon, accent }: {
 }
 
 function Panel({ title, subtitle, icon: Icon, action, children }: {
-  title: string; subtitle: string; icon: typeof Clock3; action?: string; children: React.ReactNode;
+  title: string; subtitle: string; icon: typeof Clock3; action?: string; children: ReactNode;
 }) {
   return (
     <section className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_2px_8px_rgba(15,23,42,0.025)] sm:p-6">
@@ -177,7 +178,7 @@ function Panel({ title, subtitle, icon: Icon, action, children }: {
   );
 }
 
-function FlowHealth({ title, value, color, icon, tone, detail }: { title: string; value: number; color: string; icon: React.ReactNode; tone: string; detail: string }) {
+function FlowHealth({ title, value, color, icon, tone, detail }: { title: string; value: number; color: string; icon: ReactNode; tone: string; detail: string }) {
   return (
     <div className="flex items-center gap-4"><div className={"flex size-14 shrink-0 items-center justify-center rounded-2xl " + tone}>{icon}</div><div className="min-w-0 flex-1"><div className="flex items-center justify-between gap-2"><span className="text-sm font-medium text-slate-700">{title}</span><strong className="text-sm text-slate-900">{value}%</strong></div><div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-100"><div className={"h-full rounded-full " + color} style={{ width: value + "%" }} /></div><p className="mt-1.5 text-xs text-slate-500">{detail}</p></div></div>
   );
