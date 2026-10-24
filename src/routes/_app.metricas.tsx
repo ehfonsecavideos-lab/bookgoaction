@@ -178,13 +178,13 @@ function MetricCard({
   }[tone];
 
   return (
-    <article className="card-surface min-w-0 p-5">
+    <article className="group relative min-w-0 overflow-hidden rounded-2xl border border-border/70 bg-card p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-sm text-muted-foreground">{label}</p>
           <p className="mt-2 text-3xl font-semibold tracking-tight">{value}</p>
         </div>
-        <span className={`flex size-10 shrink-0 items-center justify-center rounded-xl ${iconTone}`}>
+        <span className={`flex size-11 shrink-0 items-center justify-center rounded-2xl ring-1 ring-black/5 transition-transform duration-200 group-hover:scale-105 ${iconTone}`}>
           <Icon className="size-5" />
         </span>
       </div>
@@ -222,8 +222,8 @@ function AgileMetricsDashboard() {
   const criticalCount = projects.filter((project) => project.status === "Crítico").length;
 
   return (
-    <div className="space-y-6">
-      <section className="flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
+    <div className="space-y-7 pb-8">
+      <section className="relative isolate overflow-hidden rounded-3xl border border-border/70 bg-gradient-to-br from-card via-card to-teal-50/70 p-6 shadow-sm sm:p-8 lg:flex-row lg:items-end">
         <div>
           <div className="mb-3 flex flex-wrap items-center gap-2">
             <Badge variant="outline" className="border-sky-200 bg-sky-50 text-sky-700">
@@ -233,7 +233,7 @@ function AgileMetricsDashboard() {
               <CircleHelp className="size-3.5" /> Ambiente demonstrativo
             </span>
           </div>
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Métricas ágeis</h1>
+          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">Métricas ágeis</h1>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground sm:text-base">
             Acompanhe a saúde do portfólio, a previsibilidade das entregas e os impedimentos das equipes.
           </p>
@@ -256,17 +256,17 @@ function AgileMetricsDashboard() {
         </div>
       </section>
 
-      <section className="card-surface flex flex-col justify-between gap-4 p-4 sm:flex-row sm:items-center">
+      <section className="flex flex-col justify-between gap-4 rounded-2xl border border-border/70 bg-card/90 p-4 shadow-sm backdrop-blur sm:flex-row sm:items-center">
         <div>
           <p className="text-sm font-semibold">Perspectiva do dashboard</p>
           <p className="mt-1 text-xs text-muted-foreground">Alterne entre visão estratégica e acompanhamento operacional.</p>
         </div>
-        <div className="inline-flex w-full rounded-xl bg-muted p-1 sm:w-auto">
+        <div className="inline-flex w-full rounded-xl border border-border/60 bg-muted/70 p-1 sm:w-auto">
           <button
             type="button"
             onClick={() => setAudience("executivo")}
             aria-pressed={audience === "executivo"}
-            className={`flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition sm:flex-none ${audience === "executivo" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+            className={`flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition sm:flex-none ${audience === "executivo" ? "bg-background text-foreground shadow-sm ring-1 ring-border/70" : "text-muted-foreground hover:bg-background/60 hover:text-foreground"}`}
           >
             <Gauge className="size-4" /> Visão executiva
           </button>
@@ -291,7 +291,7 @@ function AgileMetricsDashboard() {
           </section>
 
           <section className="grid gap-4 xl:grid-cols-[1.6fr_1fr]">
-            <article className="card-surface p-5 sm:p-6">
+            <article className="rounded-2xl border border-border/70 bg-card p-5 shadow-sm transition-shadow duration-200 hover:shadow-md sm:p-6">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <h2 className="font-display text-lg font-semibold">Planejado × entregue</h2>
@@ -299,7 +299,7 @@ function AgileMetricsDashboard() {
                 </div>
                 <Badge variant="secondary">Últimos {period} dias</Badge>
               </div>
-              <div className="mt-5 h-[280px] w-full">
+              <div className="mt-6 h-[300px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <ComposedChart data={deliveryTrend} margin={{ top: 8, right: 8, left: -18, bottom: 0 }}>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
@@ -323,7 +323,7 @@ function AgileMetricsDashboard() {
                 </div>
                 <Activity className="size-5 text-muted-foreground" />
               </div>
-              <div className="mt-6 space-y-5">
+              <div className="mt-7 space-y-6">
                 {[
                   { label: "Saudável", count: healthyCount, total: projects.length, color: "bg-emerald-500", text: "text-emerald-700" },
                   { label: "Atenção", count: attentionCount, total: projects.length, color: "bg-amber-500", text: "text-amber-700" },
@@ -340,7 +340,7 @@ function AgileMetricsDashboard() {
                   </div>
                 ))}
               </div>
-              <div className="mt-7 rounded-xl bg-muted/70 p-4">
+              <div className="mt-8 rounded-2xl border border-amber-200/70 bg-gradient-to-br from-amber-50 to-orange-50/50 p-4">
                 <p className="text-sm font-medium">Ponto de atenção</p>
                 <p className="mt-1 text-sm text-muted-foreground">A Jornada de Pagamentos tem 5 impedimentos abertos e previsibilidade abaixo da meta demonstrativa de 70%.</p>
               </div>
@@ -360,7 +360,7 @@ function AgileMetricsDashboard() {
             <article className="card-surface p-5 sm:p-6">
               <h2 className="font-display text-lg font-semibold">Compromisso × conclusão por squad</h2>
               <p className="mt-1 text-sm text-muted-foreground">Pontos planejados e concluídos por sprint</p>
-              <div className="mt-5 h-[280px]">
+              <div className="mt-6 h-[300px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={teamVelocity} margin={{ top: 8, right: 8, left: -18, bottom: 0 }}>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
@@ -407,9 +407,9 @@ function AgileMetricsDashboard() {
               </div>
               <Badge variant="outline" className="border-amber-200 bg-amber-50 text-amber-700">3 prioritários</Badge>
             </div>
-            <div className="mt-4 divide-y divide-border">
+            <div className="mt-5 divide-y divide-border/70">
               {blockers.map((blocker) => (
-                <div key={blocker.title} className="flex flex-col gap-2 py-4 sm:flex-row sm:items-center sm:justify-between">
+                <div key={blocker.title} className="flex flex-col gap-3 rounded-xl px-2 py-4 transition-colors hover:bg-muted/40 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex items-start gap-3">
                     <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-lg bg-amber-50 text-amber-700">
                       <AlertTriangle className="size-4" />
@@ -427,7 +427,7 @@ function AgileMetricsDashboard() {
         </>
       )}
 
-      <section className="card-surface overflow-hidden">
+      <section className="overflow-hidden rounded-2xl border border-border/70 bg-card shadow-sm">
         <div className="flex flex-col gap-4 border-b border-border p-5 sm:flex-row sm:items-end sm:justify-between sm:p-6">
           <div>
             <h2 className="font-display text-lg font-semibold">{audience === "executivo" ? "Projetos do portfólio" : "Projetos acompanhados"}</h2>
@@ -460,7 +460,7 @@ function AgileMetricsDashboard() {
         </div>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[760px] text-left text-sm">
-            <thead className="bg-muted/50 text-xs uppercase tracking-wide text-muted-foreground">
+            <thead className="bg-muted/50 text-xs uppercase tracking-wider text-muted-foreground">
               <tr>
                 <th className="px-5 py-3 font-medium">Projeto / Squad</th>
                 <th className="px-5 py-3 font-medium">Responsável</th>
@@ -470,9 +470,9 @@ function AgileMetricsDashboard() {
                 <th className="px-5 py-3 font-medium">Saúde</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border">
+            <tbody className="divide-y divide-border/70">
               {visibleProjects.map((project) => (
-                <tr key={project.name} className="transition-colors hover:bg-muted/30">
+                <tr key={project.name} className="transition-colors hover:bg-teal-50/40 dark:hover:bg-muted/40">
                   <td className="px-5 py-4">
                     <p className="font-semibold">{project.name}</p>
                     <p className="mt-1 text-xs text-muted-foreground">{project.team} · {project.sprint}</p>
@@ -480,8 +480,8 @@ function AgileMetricsDashboard() {
                   <td className="px-5 py-4 text-muted-foreground">{project.owner}</td>
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="h-1.5 w-20 overflow-hidden rounded-full bg-muted">
-                        <div className="h-full rounded-full bg-teal-700" style={{ width: `${project.progress}%` }} />
+                      <div className="h-2 w-24 overflow-hidden rounded-full bg-muted/80 ring-1 ring-border/40">
+                        <div className="h-full rounded-full bg-gradient-to-r from-teal-600 to-sky-500 transition-all" style={{ width: `${project.progress}%` }} />
                       </div>
                       <span className="text-xs tabular-nums">{project.progress}%</span>
                     </div>
@@ -505,7 +505,7 @@ function AgileMetricsDashboard() {
         </div>
       </section>
 
-      <p className="text-xs leading-relaxed text-muted-foreground">
+      <p className="rounded-xl border border-dashed border-border/80 bg-muted/20 px-4 py-3 text-xs leading-relaxed text-muted-foreground">
         Nota metodológica: saúde, previsibilidade e metas nesta tela são exemplos para prototipação. Na próxima etapa, definiremos fórmulas, fontes, periodicidade e permissões antes de conectar dados reais.
       </p>
     </div>
