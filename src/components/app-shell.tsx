@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { BookOpen, Flame, LibraryBig, LogOut, Plus, Sparkles } from "lucide-react";
+import { BookOpen, ChartNoAxesCombined, Flame, LibraryBig, LogOut, Plus, Sparkles } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -51,6 +51,11 @@ export function AppShell({ children }: { children: ReactNode }) {
             <Link to="/biblioteca">
               <Button variant="ghost" size="sm">
                 <LibraryBig /> Biblioteca
+              </Button>
+            </Link>
+            <Link to="/metricas">
+              <Button variant="ghost" size="sm">
+                <ChartNoAxesCombined /> Métricas ágeis
               </Button>
             </Link>
           </nav>
