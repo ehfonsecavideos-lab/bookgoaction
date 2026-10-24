@@ -14,6 +14,7 @@ import { Route as AppRouteImport } from './routes/_app'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppBibliotecaRouteImport } from './routes/_app.biblioteca'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppMetricasRouteImport } from './routes/_app.metricas'
 import { Route as AppNovaRouteImport } from './routes/_app.nova'
 import { Route as AppJornadaIdRouteImport } from './routes/_app.jornada.$id'
 
@@ -57,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/biblioteca': typeof AppBibliotecaRoute
   '/dashboard': typeof AppDashboardRoute
+  '/metricas': typeof AppMetricasRoute
   '/nova': typeof AppNovaRoute
   '/jornada/$id': typeof AppJornadaIdRoute
 }
@@ -75,6 +77,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_app/biblioteca': typeof AppBibliotecaRoute
   '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/metricas': typeof AppMetricasRoute
   '/_app/nova': typeof AppNovaRoute
   '/_app/jornada/$id': typeof AppJornadaIdRoute
 }
@@ -91,6 +94,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_app/biblioteca'
     | '/_app/dashboard'
+    | '/_app/metricas'
     | '/_app/nova'
     | '/_app/jornada/$id'
   fileRoutesById: FileRoutesById
@@ -138,6 +142,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDashboardRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/metricas': {
+      id: '/_app/metricas'
+      path: '/metricas'
+      fullPath: '/metricas'
+      preLoaderRoute: typeof AppMetricasRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/nova': {
       id: '/_app/nova'
       path: '/nova'
@@ -158,6 +169,7 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppBibliotecaRoute: typeof AppBibliotecaRoute
   AppDashboardRoute: typeof AppDashboardRoute
+  AppMetricasRoute: typeof AppMetricasRoute
   AppNovaRoute: typeof AppNovaRoute
   AppJornadaIdRoute: typeof AppJornadaIdRoute
 }
@@ -165,6 +177,7 @@ interface AppRouteChildren {
 const AppRouteChildren: AppRouteChildren = {
   AppBibliotecaRoute: AppBibliotecaRoute,
   AppDashboardRoute: AppDashboardRoute,
+  AppMetricasRoute: AppMetricasRoute,
   AppNovaRoute: AppNovaRoute,
   AppJornadaIdRoute: AppJornadaIdRoute,
 }
