@@ -223,7 +223,7 @@ function AgileMetricsDashboard() {
 
   return (
     <div className="space-y-7 pb-8">
-      <section className="relative isolate overflow-hidden rounded-3xl border border-border/70 bg-gradient-to-br from-card via-card to-teal-50/70 p-6 shadow-sm sm:p-8 lg:flex-row lg:items-end">
+      <section className="relative isolate flex flex-col justify-between gap-5 overflow-hidden rounded-3xl border border-border/70 bg-gradient-to-br from-card via-card to-teal-50/70 p-6 shadow-sm sm:p-8 lg:flex-row lg:items-end">
         <div>
           <div className="mb-3 flex flex-wrap items-center gap-2">
             <Badge variant="outline" className="border-sky-200 bg-sky-50 text-sky-700">
